@@ -22,7 +22,6 @@ def Load_Cifar_10_Dataset(file_path):
         Data_Set = np.vstack((Data_Set, batch_data))
         Data_Label = np.hstack((Data_Label, batch_label))
     return Data_Set, Data_Label
-Load_Cifar_10_Dataset(file_path)
 
 class Cifar10_DataSet(Dataset):
     def __init__(self, file_path, transform=None):
