@@ -11,7 +11,8 @@ def unpickle(file):
 
 def Load_Cifar_10_Batch(batch_path):
     batch_dict = unpickle(batch_path)
-    batch_data = batch_dict[b'data'].astype(np.float)/255.
+    batch_data = batch_dict[b'data'].astype(np.float)
+    batch_data /= 255.
     batch_label = batch_dict[b'labels']
     batch_data = batch_data.reshape(10000, 3, 32, 32)
     return np.array(batch_data), np.array(batch_label)
