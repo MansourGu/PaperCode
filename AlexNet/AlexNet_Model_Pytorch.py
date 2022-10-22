@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 #########超参数设置#########
 device = 'cuda'
-lr = 1e-4  # 学习率
+lr = 1e-3 # 学习率
 batch_size = 128
 num_class = 10
 weight_decay = 5e-4
