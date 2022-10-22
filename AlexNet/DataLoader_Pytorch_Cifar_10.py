@@ -2,8 +2,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
-Train_file_path = 'E:/Code/DataSet/cifar-10-batches-py/data_batch_{}'
-Test_file_path = 'E:/Code/DataSet/cifar-10-batches-py/test_batch'
+
 def unpickle(file):
     import pickle
     with open(file, 'rb') as fo:
@@ -12,7 +11,7 @@ def unpickle(file):
 
 def Load_Cifar_10_Batch(batch_path):
     batch_dict = unpickle(batch_path)
-    batch_data = batch_dict[b'data']
+    batch_data = batch_dict[b'data'].astype(np.float)
     batch_label = batch_dict[b'labels']
     batch_data = batch_data.reshape(10000, 3, 32, 32)
     return np.array(batch_data), np.array(batch_label)
@@ -45,6 +44,7 @@ class Cifar10_DataSet(Dataset):
         img = torch.Tensor(img)
         if self.transform is not None:
             img = self.transform(img)
+
         return img, label
 
     def __len__(self):
