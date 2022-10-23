@@ -115,12 +115,16 @@ class MyNet(nn.Module): # 从AlexNet修改以适应CIFAR-10数据集
         ######Linear Layer###
         batch_size = x.shape[0]
         x = x.reshape(batch_size, -1, 1).squeeze()
-        x = self.DropOut(x)
+
         x = self.Linear1(x)
         x = self.Relu(x)
         x = self.DropOut(x)
+
+
         x = self.Linear2(x)
         x = self.Relu(x)
+        x = self.DropOut(x)
+
         x = self.Linear3(x)
         return x
 
