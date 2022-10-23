@@ -210,6 +210,7 @@ def predict_test_batch(imgs, label):
     test_loss(loss)
     test_accuracy(label, preds)
 
+
 for epoch in range(num_epoch):
     train_loss.reset_states()
     train_accuracy.reset_states()
