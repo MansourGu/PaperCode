@@ -125,7 +125,7 @@ class MyNet(nn.Module):
         self.Conv8 = nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1)  # (batch, 128, 32, 32)
         self.Conv9 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1)  # (batch, 128, 32, 32)
         self.Conv10 = nn.Conv2d(128, 128, kernel_size=1, stride=1, padding=0)  # (batch, 128, 32, 32)
-        self.MaxPool4 = nn.MaxPool2d(kernel_size=2, stride=2)  # (batch, 512, 16, 16)
+        self.MaxPool4 = nn.MaxPool2d(kernel_size=2, stride=2)  # (batch, 128, 16, 16)
 
         self.Conv11 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1)  # (batch, 128, 16, 16)
         self.Conv12 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1)  # (batch, 128, 16, 16)
@@ -181,11 +181,11 @@ class MyNet(nn.Module):
         x = self.Flatten(x)
         x = self.Linear1(x)
         x = self.Relu(x)
-  #      x = self.Dropout(x)
+        x = self.Dropout(x)
 
         x = self.Linear2(x)
         x = self.Relu(x)
-    #    x = self.Dropout(x)
+        x = self.Dropout(x)
 
         x = self.Linear3(x)
 
