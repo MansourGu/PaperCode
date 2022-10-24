@@ -6,7 +6,6 @@ from torchvision import transforms
 from DataLoader_Pytorch_Cifar_10 import Cifar10_DataSet
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-
 #########超参数设置#########
 device = 'cuda'
 lr = 1e-3 # 学习率
@@ -182,18 +181,21 @@ for epoch in range(num_epoch):
         loss.backward()
         optimizer.step()
 
-    Net.eval() # 在测试集训练
-    for i, data in enumerate(Test_DataLoader):
-        img, label = data
-        label = label.type(torch.LongTensor)  ##将label从int 转化为长向量
-        img, label = img.to(device), label.to(device)
-        output = Net(img)
-        loss = criterion(output, label).to(device)
-        _, preds = torch.max(output, dim=1)
-        Correct += torch.sum(preds == label).item()
-        Total_Loss += loss
-    lr_scheduler.step()
-    print('Epoch{}: Test_AverageLoss:{}, Test_Acc:{}%'.format(epoch+1, Total_Loss/10000, Correct/100))
+    with torch.no_grad():
+        Net.eval()  # 在测试集训练
+        for i, data in enumerate(Test_DataLoader):
+            img, label = data
+            label = label.type(torch.LongTensor)  ##将label从int 转化为长向量
+            img, label = img.to(device), label.to(device)
+            output = Net(img)
+            loss = criterion(output, label).to(device)
+            _, preds = torch.max(output, dim=1)
+            Correct += torch.sum(preds == label).item()
+            Total_Loss += loss
+        lr_scheduler.step()
+        print('Epoch{}: Test_AverageLoss:{}, Test_Acc:{}%'.format(epoch + 1, Total_Loss / 10000, Correct / 100))
+
+
 
 
 
