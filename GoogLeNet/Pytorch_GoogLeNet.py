@@ -44,7 +44,7 @@ class Inception_v1(nn.Module):
         branch1 = self.branch1(x)
         branch2 = self.branch2(x)
         branch3 = self.branch3(x)
-        branch4 =self.branch4(x)
+        branch4 = self.branch4(x)
         output = [branch1, branch2, branch3, branch4]
         return output
 
