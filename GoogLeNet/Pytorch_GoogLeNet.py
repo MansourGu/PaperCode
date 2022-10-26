@@ -53,7 +53,8 @@ class Inception_v1(nn.Module):
         return torch.cat(result, 1)
 
 class Aux_Logits(nn.Module):
-    def __init__(self, input_channel, num_class):
+    def \
+            __init__(self, input_channel, num_class):
         super(Aux_Logits, self).__init__()
         self.Conv1 = nn.Conv2d(in_channels=input_channel, out_channels=128, kernel_size=1, stride=1, padding=0)
         self.ReLu = nn.ReLU()
