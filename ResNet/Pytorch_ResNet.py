@@ -111,6 +111,7 @@ class Bottleneck(nn.Module):
         x = self.ReLu(x)
         x = self.Conv2(x)
         x = self.BN2(x)
+        x = self.ReLu(x)
         x = self.Conv3(x)
         x = self.BN3(x)
 
@@ -186,7 +187,7 @@ class ResNet_Cifar(nn.Module):
         self.Conv1 = nn.Conv2d(in_channels=3, out_channels=16, kernel_size=3, stride=1, padding=1)
         self.BN1 = nn.BatchNorm2d(16)
         self.Relu = nn.ReLU()
-        self.Layer1 = self.make_layer(self.n * 6 + 2, 16, 16, is_DownSaple=False)
+        self.Layer1 = self.make_layer(self.n * 2 + 1, 16, 16, is_DownSaple=False)
         self.Layer2 = self.make_layer(self.n * 2, 16, 32, is_DownSaple=True)
         self.Layer3 = self.make_layer(self.n * 2, 32, 64, is_DownSaple=True)
         self.AvgPool = nn.AdaptiveAvgPool2d((1, 1))
