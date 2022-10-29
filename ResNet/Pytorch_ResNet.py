@@ -130,22 +130,22 @@ class ResNet_ImageNet(nn.Module):
         self.Relu = nn.ReLU()
         self.MaxPool1 = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         if Block == Bottleneck:
-            self.Layer1 = self.make_layer(self.block_list[0], Block, 64, 64, 256, is_DownSaple=True, dilation=1)
-            self.Layer2 = self.make_layer(self.block_list[1], Block, 256, 128, 512, is_DownSaple=True)
-            self.Layer3 = self.make_layer(self.block_list[2], Block, 512, 256, 1024, is_DownSaple=True)
-            self.Layer4 = self.make_layer(self.block_list[3], Block, 1024, 512, 2048, is_DownSaple=True)
+            self.Layer1 = self.make_layer(self.block_list[0], Block, 64, 64, 256, is_DownSample=True, dilation=1)
+            self.Layer2 = self.make_layer(self.block_list[1], Block, 256, 128, 512, is_DownSample=True)
+            self.Layer3 = self.make_layer(self.block_list[2], Block, 512, 256, 1024, is_DownSample=True)
+            self.Layer4 = self.make_layer(self.block_list[3], Block, 1024, 512, 2048, is_DownSample=True)
             self.Linear = nn.Linear(2048, 1000)
         else:
-            self.Layer1 = self.make_layer(self.block_list[0], Block, 64, 64, 64, is_DownSaple=False)
-            self.Layer2 = self.make_layer(self.block_list[1], Block, 64, 128, 128, is_DownSaple=True)
-            self.Layer3 = self.make_layer(self.block_list[2], Block, 128, 256, 256, is_DownSaple=True)
-            self.Layer4 = self.make_layer(self.block_list[3], Block, 256, 512, 512, is_DownSaple=True)
+            self.Layer1 = self.make_layer(self.block_list[0], Block, 64, 64, 64, is_DownSample=False)
+            self.Layer2 = self.make_layer(self.block_list[1], Block, 64, 128, 128, is_DownSample=True)
+            self.Layer3 = self.make_layer(self.block_list[2], Block, 128, 256, 256, is_DownSample=True)
+            self.Layer4 = self.make_layer(self.block_list[3], Block, 256, 512, 512, is_DownSample=True)
             self.Linear = nn.Linear(512, 1000)
         self.AvgPool = nn.AdaptiveAvgPool2d((1, 1))
         self.Flatten = nn.Flatten()
-    def make_layer(self, num, Block, input_channel, mid_channel, output_channel, is_DownSaple = True, dilation=2):
+    def make_layer(self, num, Block, input_channel, mid_channel, output_channel, is_DownSample = True, dilation=2):
         layer = []
-        if is_DownSaple:
+        if is_DownSample:
             DownSample_layer = DownSample(input_channel, output_channel, dilation)
         else:
             DownSample_layer = None
